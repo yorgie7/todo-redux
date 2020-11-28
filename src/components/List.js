@@ -3,27 +3,26 @@ import { connect } from "react-redux";
 import { deleteTodo } from "../redux/actions";
 
 const List = (props) => {
-  console.log(props);
+  
   return (<>
   
     {
       props.myTodos.length>0 ?
-    (<div className="container mx-auto border-black border-solid border-2">
-
-        {props.myTodos.map((todo, index) => (
-         <div class="flex mb-4 items-center" key={todo.id}>
-         <p class="w-full text-grey-darkest">{todo.message}</p>
+    (<div className="container border-black px-4 m-4 border-solid border-2">
+        {
+        props.myTodos.map((todoObj, index) => (
+         <div class="flex mb-2 mt-2 items-center py-2 bg-gray-100" key={todoObj.id}>
+         <li class="w-full text-left text-grey">{todoObj.todo}</li>
          <button
-          class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-green text-green border-green hover:bg-green" onClick={() => props.dispatch(deleteTodo(todo.id))}>
+          class="flex-no-shrink text-green ml-2 px-2 py-1 mr-2 border-2 rounded hover:bg-white" onClick={() => props.dispatch(deleteTodo(todoObj.id))}>
             Done
             </button>
          
          </div>
-  
         
         ))}
   
-    </div>) : (<p class="w-full text-grey-darkest my-4 mx-0">Enter todo...</p>)
+    </div>) : (<p class="w-full text-grey-darkest my-4 mx-0">Add Your todo...</p>)
     }
     </>
   );
@@ -34,22 +33,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(List);
-
-// <div className="container mx-auto">
-// <ul>
-//   {props.myTodos.map((todo, index) => (
-//     <li
-//       className="text-left text-white border-black border-dashed border-2 my-2 py-2 bg-gray-400 px-2"
-//       key={index}
-//     >
-//       {todo.message}
-//       <button
-//         className="flex-2 bg-gray-50 ml-32 text-black px-2"
-//         onClick={() => props.dispatch(deleteTodo(todo.id))}
-//       >
-//         Done
-//       </button>
-//     </li>
-//   ))}
-// </ul>
-// </div>
